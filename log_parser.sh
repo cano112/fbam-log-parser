@@ -43,7 +43,7 @@ do
       file_content=$(cat "$filename")
       workflow_id_colon=${workflow_id//_/-}
       job_id_full="$workflow_id_colon-$job_id"
-      modified_content=$(sed -E 's~("command": "[^ ]*",)~\1 "workflowId": "'"$workflow_id_colon"'", "jobId": "'"$job_id_full"'",~' <<< "$file_content")
+      modified_content=$(sed -E 's~("command": "[^,]*",)~\1 "workflowId": "'"$workflow_id_colon"'", "jobId": "'"$job_id_full"'",~' <<< "$file_content")
       echo "$modified_content" >> "$target_dir/file_access_log_$workflow_id.jsonl"
     fi
   fi
